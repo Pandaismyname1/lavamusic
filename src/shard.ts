@@ -2,6 +2,8 @@ import { ShardingManager } from 'discord.js';
 import { env } from './env';
 import type Logger from './structures/Logger';
 
+export let globalManager: ShardingManager;
+
 export async function shardStart(logger: Logger) {
 	const manager = new ShardingManager('./dist/LavaClient.js', {
 		respawn: true,
@@ -9,6 +11,7 @@ export async function shardStart(logger: Logger) {
 		totalShards: 'auto',
 		shardList: 'auto',
 	});
+	globalManager = manager;
 
 	manager.on('shardCreate', shard => {
 		shard.on('ready', () => {

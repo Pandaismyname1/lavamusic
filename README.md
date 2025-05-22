@@ -41,6 +41,7 @@
 - 24/7 Music Playback
 - Playlist commands
 - Music channel system
+- HTTP API for external control (play music via HTTP requests UNSECURE, USE AT OWN RISK)
 
 ## 🎶 Support Sources
 
@@ -219,6 +220,40 @@ Do note that the bot will restart itself to update to the latest!
 ## 📝 Tutorial
 
 A tutorial has been uploaded on YouTube. Watch it by [clicking here](https://youtu.be/x5lQD2rguz0).
+
+## 🌐 HTTP API
+
+Lavamusic provides an HTTP API that allows external applications to control the bot. Currently, the following endpoints are available:
+
+### Play Endpoint
+
+**Endpoint:** `GET /play`
+
+**Description:** Triggers the bot to play music in the voice channel where the specified user is connected.
+
+**Parameters:**
+- `clientId` (required): The Discord user ID of the user who wants to play music. The user must be in a voice channel.
+- `query` (required): The search query or URL to play (same as the play command).
+
+**Example:**
+```
+GET http://your-bot-host:PORT/play?clientId=123456789012345678&query=never+gonna+give+you+up
+```
+
+**Response:**
+```json
+{
+  "success": true,
+  "clientId": "123456789012345678",
+  "query": "never gonna give you up",
+  "message": "Processed play request for clientId: 123456789012345678 with query: never gonna give you up"
+}
+```
+
+**Error Responses:**
+- 400 Bad Request: Missing required parameters
+- 404 Not Found: User not found in any voice channel
+- 500 Internal Server Error: An error occurred while processing the request
 
 ## 📜 Contributing
 

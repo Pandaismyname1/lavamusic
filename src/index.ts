@@ -2,6 +2,7 @@ import * as fs from 'node:fs';
 import { shardStart } from './shard';
 import Logger from './structures/Logger';
 import { ThemeSelector } from './utils/ThemeSelector';
+import { app } from "./http-server";
 
 const logger = new Logger();
 
@@ -21,6 +22,7 @@ try {
 		logger.error('LavaLogo.txt file is missing');
 		process.exit(1);
 	}
+    app;
 	console.clear();
 	// Set a custom title for the console window
 	setConsoleTitle('Lavamusic');

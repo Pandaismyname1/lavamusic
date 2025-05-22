@@ -11,6 +11,7 @@ const clientOptions: ClientOptions = {
 
 const client = new Lavamusic(clientOptions);
 client.start(env.TOKEN);
+export const lavamusic = client;
 
 /**
  * Project: lavamusic

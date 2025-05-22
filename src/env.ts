@@ -63,6 +63,12 @@ const envSchema = z.object({
 	),
 	NODES: z.preprocess(val => (typeof val === 'string' ? JSON.parse(val) : val), z.array(LavalinkNodeSchema)),
 	GENIUS_API: z.string().optional(),
+	EXPRESS_PORT: z.preprocess(val => {
+		if (typeof val === 'string') {
+			return Number.parseInt(val, 10);
+		}
+		return val;
+	}, z.number().default(8585)),
 });
 
 type Env = z.infer<typeof envSchema>;
